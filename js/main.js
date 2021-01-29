@@ -1,0 +1,1 @@
+let game = new Game('container', { width: 640, height: 385 });

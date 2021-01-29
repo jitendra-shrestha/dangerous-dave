@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'arcadeclassic';
+  src: url('../assets/fonts/arcadeclassic.regular.ttf');
+}
+
+body {
+  background-color: #313639;
+}
+
+#container {
+  position: absolute;
+  width: 640px;
+  left: 25%;
+  top: 20%;
+}
+
