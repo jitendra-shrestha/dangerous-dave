@@ -7,6 +7,11 @@ class Level {
     this.isLevelingUp = false;
     this.player = new Player(this.game, this.map.player);
     this.entities.push(this.player);
+    if (this.map.enemies) {
+      for (let enemy of this.map.enemies) {
+        this.entities.push(new Enemy(this.game, enemy.x * Tile.size, enemy.y * Tile.size));
+      }
+    }
   }
 
   /**

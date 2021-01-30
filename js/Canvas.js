@@ -123,21 +123,21 @@ class Canvas {
         return;
       }
       if (tile === 'F') {
-        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 2);
+        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 5);
         return;
       }
 
       if (tile === 'f') {
-        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 2);
+        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 5);
         return;
       }
 
       if (tile === 'W') {
-        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 2);
+        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 5);
         return;
       }
       if (tile === 'S') {
-        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 2);
+        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 5);
         return;
       }
 

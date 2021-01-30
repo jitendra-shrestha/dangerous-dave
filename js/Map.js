@@ -46,14 +46,24 @@ class LevelMap {
           'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA Y \\GGGGGGGGGGGGGGGGGGGG',
           'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGE    =GA  Y \\GGGGGGGGGGGGGGGGGG',
           'GQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ         GA Y Y  Y   GGGGGGGGGGGG',
-          'GD   D   Z    D    D   D    D       D   D    D    D     D           GGGGGGGGGG  GGGGGGGGGGGG',
+          'GD   D   Z    D    D   D    D       D         D   D                 GGGGGGGGGG  GGGGGGGGGGGG',
           'G                                                           G  G    C           GGGGGGGGGGGG',
-          'G+   S   S   SS    S   S   S   S    S   SS   S   S   S               Y          GGGGGGGGGGGG',
+          'G+   S   S   SS    S   S   S   S   S     SS   S   S   S             Y           GGGGGGGGGGGG',
           'GQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQff      ffG/         GGGGGGGGGGGG',
           'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGff    ffG/          GGGGGGGGGGGG',
           'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGffJTffG/         GGGGGGGGGGGGGG',
           'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFFFFFFFFFGGGGGGGGGGGGGGG'
         ],
+        enemies: [
+          {
+            x: 15.5,
+            y: 3.5
+          },
+          {
+            x: 55,
+            y: 3.5
+          }
+        ]
       }
     ];
 

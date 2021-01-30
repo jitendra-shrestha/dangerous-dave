@@ -65,6 +65,47 @@ class Game {
   start() {
     const that = this;
 
+    // const splashdiv = document.createElement('div');
+    // const container = document.getElementById(this.containerId);
+    // splashdiv.style.width = 640 + 'px';
+    // splashdiv.style.height = 385 + 'px';
+    // splashdiv.style.backgroundColor = '#000000';
+
+    // container.appendChild(splashdiv);
+
+    // const p = document.createElement('p');
+    // splashdiv.appendChild(p);
+    // p.innerHTML ="Press Space  to continue";
+    
+    // const img = document.createElement('img');
+    // splashdiv.appendChild(img);
+    // img.style.width = 220 + 'px';
+    // img.style.height = 90 + 'px';
+    // img.src = 'assets/images/dangerous dave title.gif';
+    // img.style.position ='absolute';
+    // img.style.left = (640/2 - 110) + 'px';
+    // img.style.top = 30 + 'px';
+
+    // const img2 = document.createElement('img');
+    // splashdiv.appendChild(img2);
+    // img2.style.width = 300 + 'px';
+    // img2.style.height = 150+ 'px';
+    // img2.src = 'assets/images/dave_background.gif';
+    // img2.style.position ='absolute';
+    // img2.style.left = (640/2 - 150) + 'px';
+    // img2.style.top = 150 + 'px';
+
+    // window.addEventListener('keydown', handler);
+
+    // function handler(e){
+    //   if (e.keyCode === 32) {
+    //     container.removeChild(splashdiv);
+    //     window.removeEventListener('keydown',handler);
+    //     initGameObjects();
+    //     that.loop();
+    //   }
+    // }
+
     initGameObjects();
     that.loop();
 
