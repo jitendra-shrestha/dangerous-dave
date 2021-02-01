@@ -100,6 +100,14 @@ class Level {
 
     if (this.isLevelingUp) return;
 
+    let jetpackFuel = this.player.jetpackFuel;
+
+    if(this.player.hasJetpack){
+      ctx.fillStyle = '#FFF003';
+      ctx.fillRect( canvas.width / 2-140, canvas.height -60, 210,20);
+      ctx.fillStyle = '#FF3A00';
+      ctx.fillRect( canvas.width / 2-135, canvas.height -58, jetpackFuel*2 ,15);
+    }
 
     if(this.player.hasTrophy || this.player.hasGun || this.player.hasJetpack){
       this.drawInfo();

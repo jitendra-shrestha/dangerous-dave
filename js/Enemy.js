@@ -25,7 +25,7 @@ class Enemy extends Entity {
       if (this.x >= this.orgX && this.y === this.destY) {
         this.x -= this.vel;
       }
-  
+
       if (this.y >= this.orgY && this.x === this.orgX) {
         this.y -= this.vel;
       }
@@ -35,6 +35,7 @@ class Enemy extends Entity {
     update() {
       this.move();
       this.direction = (this.game.level.player.x < this.x) ? -1 : 1;
+      this.shoot(3);
     }
   
     draw() {

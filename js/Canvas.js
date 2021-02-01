@@ -30,7 +30,7 @@ class Canvas {
       playerjr: new Sprite(6, 4), // player in jetpack right
       playerjl: new Sprite(5, 4), // player in jetpack left
 
-      // enemy
+      // enemy and bullet
       bullet: new Sprite(3, 14, 20, 10),
       spider: new Sprite(2, 10, 100, 64),
       

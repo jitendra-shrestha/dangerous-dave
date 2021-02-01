@@ -56,7 +56,7 @@ class LevelMap {
         ],
         enemies: [
           {
-            x: 15.5,
+            x: 37,
             y: 3.5
           },
           {

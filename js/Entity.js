@@ -9,6 +9,7 @@ class Entity {
     this.game = game;
     this.x = x;
     this.y = y;
+    this.bullet = null;
   }
 
   kill() {
@@ -48,7 +49,6 @@ class Entity {
         tile: this.game.level.getTile(corners[i][0], corners[i][1])
       });
     }
-
     return touchedTiles;
   }
 
@@ -102,6 +102,15 @@ class Entity {
       this.x + this.width > entity.x &&
       this.y < entity.y + entity.height &&
       this.y + this.height > entity.y);
+  }
+
+  shoot(vel) {
+    let x, y;
+    if (this.bullet) return;
+    x = this.direction === 1 ? this.x + this.width : this.x;
+    y = this.y + this.height / 2;
+    this.bullet = new Bullet(this.game, this, x, y, this.direction, vel);
+    this.game.level.entities.push(this.bullet);
   }
   
 }

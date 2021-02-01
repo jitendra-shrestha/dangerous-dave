@@ -12,12 +12,25 @@ class Player extends Entity {
     this.hasTrophy = false;
     this.hasGun = false;
     this.hasJetpack = false;
+    this.jetpackFuel = 100;
+    this.isUsingJetpack = false;
   }
 
   update() {
     const { keys } = this.game.input;
     const vel = 2.5;
 
+    if (this.isUsingJetpack) {
+      if (keys.up.hold) {
+        this.y -= vel;
+        this.adjustJump();
+      }
+      if (keys.down.hold) {
+        this.y += vel;
+        this.adjustFall();
+      }
+      this.jetpackFuel -= 0.1;
+    } else {
       if (keys.up.hold) {
         if (!this.isJumping && this.canJump()) {
           this.t = 5;
@@ -54,6 +67,7 @@ class Player extends Entity {
         }
         this.adjustJump();
       }
+    }
 
     if (keys.right.hold) {
       this.x += vel;
@@ -67,6 +81,24 @@ class Player extends Entity {
       this.direction = -1;
       this.blink = 0;
       this.adjustWalk('left');
+    }
+
+    if (keys.z.pulse && this.hasGun) {
+      this.shoot(5);
+    }
+
+    if (keys.x.pulse && this.hasJetpack) {
+      this.isUsingJetpack = !this.isUsingJetpack;
+
+      if (this.isUsingJetpack) {
+        this.isJumping = false;
+      }
+    }
+
+    if (this.jetpackFuel < 0) {
+      this.hasJetpack = false;
+      this.isUsingJetpack = false;
+      this.jetpackFuel = 100;
     }
 
     this.touchTiles();
@@ -124,7 +156,14 @@ class Player extends Entity {
       sprite += this.direction === 1 ? 'r' : 'l';
 
      this.game.canvas.drawSprite(this.x, this.y, sprite);
-    }  
+    } 
+    
+    if (this.isUsingJetpack) {
+     let sprite = 'playerj';
+      sprite += this.direction === 1 ? 'r' : 'l';
+     this.game.canvas.drawSprite(this.x, this.y, sprite);
+
+    }
   }
 
   touchTiles() {
@@ -150,6 +189,8 @@ class Player extends Entity {
 
       if (tile.tile === 'J') {
         this.hasJetpack = true;
+        this.hasGun = false;
+
       }
 
       if (Tile.isLethal(tile.tile)) {
@@ -158,6 +199,7 @@ class Player extends Entity {
 
       if (Tile.isPickable(tile.tile)) {
         this.game.score.value += Tile.scoreValue(tile.tile);
+        console.log(this.game.score.value);
         this.game.level.clearTile(tile.x, tile.y);
       }
     }
