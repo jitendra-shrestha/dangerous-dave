@@ -15,6 +15,7 @@ class Sprite {
   }
 
   draw(ctx, x, y) {
+    // console.log(Sprite.image.complete)
     ctx.drawImage(Sprite.image, this.sx, this.sy, this.sw, this.sh, x, y, this.dw, this.dh);
   }
 

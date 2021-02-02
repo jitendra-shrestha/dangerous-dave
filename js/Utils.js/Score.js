@@ -109,7 +109,7 @@ class Score {
       this.ctx.drawImage(sprite, 517, 704, 32, 50, 285, 0, 22, 30)
       this.ctx.drawImage(sprite, 99, 704, 32, 50, 306, 0, 20, 30)
       this.ctx.drawImage(sprite, 258, 704, 31, 50, 326, 0, 20, 30)
-      this.ctx.drawImage(sprite, 553, 704, 23, 50, 346, 0, 20, 30)
+      // this.ctx.drawImage(sprite, 553, 704, 23, 50, 346, 0, 20, 30)
     
       if(this.game.currentLevel == 0){
         this.ctx.drawImage(sprite, 0, 753, 32, 45, 365, 0, 21, 30)
@@ -123,6 +123,10 @@ class Score {
       if(this.game.currentLevel == 2){
         this.ctx.drawImage(sprite, 0, 753, 32, 45, 365, 0, 21, 30)
         this.ctx.drawImage(sprite, 100, 753, 23, 45, 390, 0, 22, 30)
+      }
+      if(this.game.currentLevel == 3){
+        this.ctx.drawImage(sprite, 0, 753, 32, 45, 365, 0, 21, 30)
+        this.ctx.drawImage(sprite, 135, 753, 23, 45, 390, 0, 22, 30)
       }
       this.ctx.drawImage(sprite, 66, 704, 32, 50, 429, 0, 20, 30)
       this.ctx.drawImage(sprite, 0, 704, 32, 50, 451, 0, 20, 30)

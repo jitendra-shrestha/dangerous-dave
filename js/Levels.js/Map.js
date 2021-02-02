@@ -64,6 +64,24 @@ class LevelMap {
             y: 3.5
           }
         ]
+      },
+      {
+        player: {
+          x: 1,
+          y: 5
+        },
+        tiles: [
+          'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL',
+          'L     TL    D       D    D   D            D  D LR      D   D  D            DL D D  D  D  D D  D  DCLLLLLLLLLLL',
+          'L  LLLLL            L              LLL LLLLLLL    WLLLLLLL        DWLLW L  DL LLLLLLLLLLLLL      =LLLLLLLLLLLL',
+          'LL       LLL LLLL      L   LLLLL            DL    LL   D     LLL LLL  LDL  DL D                LLLLLLLLLLLLLLL',
+          'L*L    LLLD       L        D       L  LD             LLLLLW   L      JLDL  DLLLLLD L LS     L     LLLLLLLLLLLL',
+          'L LffLLLD            L  LL         L  LLLLL    LLLLL LR DLWL    L   LLLDL       LL L DLSSSE  SSL  LLLLLLLLLLLL',
+          'L DLLLD    L    L  L    LL    LLL  L           L     LW  DWL    LL LL   L  LLLSYL  L  DLLLL  LLLL LLLLLLLLLLLL',
+          'L        LLLL   L      LLLL        L  LLLLL L  L LLLLLL LLLL  L              LLLL LL          DL  LLLLLLLLLLLL',
+          'L       LLLLLL  L     LLLLLL       L                          L      L  L                        LLLLLLLLLLLLL',
+          'LLLLLLLLLLLLLLLLLLLLLLLLLLLLFFFFFFFLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL'
+        ],
       }
     ];
 

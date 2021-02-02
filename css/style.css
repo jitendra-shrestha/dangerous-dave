@@ -10,19 +10,30 @@ body {
 #container {
   position: absolute;
   width: 640px;
-  left: 25%;
-  top: 20%;
+  left: 200px;
+  top: 150px;
   color: #a62c07;
   font-family: 'arcadeclassic';
   font-size: 40px;
 }
 
-p{
+.context{
   position: absolute;
   bottom: -20px;
   text-align: center;
+  color: #DCDBDB;
   width:100%;
 }
+
+.controls{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #DCDBDB;
+  font-size: 20px;
+  width:100%;
+}
+
 
 .last-canvas {
   width: 400px;

@@ -62,6 +62,7 @@ class Canvas {
       '-': new Sprite(4, 8), // purple platform
       '=': new Sprite(1, 8), // door
       '+': new Sprite(2, 8), // pipe left
+      '*': new Sprite(3, 8), // pipe down
      
 
       // key denotes to same alphabets
@@ -128,7 +129,7 @@ class Canvas {
       }
 
       if (tile === 'f') {
-        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 5);
+        this.sprites[tile].animate(this.ctx, x - this.view.x, y - this.view.y, 30);
         return;
       }
 

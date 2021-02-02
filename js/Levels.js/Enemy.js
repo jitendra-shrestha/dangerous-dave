@@ -35,6 +35,7 @@ class Enemy extends Entity {
     update() {
       this.move();
       this.direction = (this.game.level.player.x < this.x) ? -1 : 1;
+      if (this.onScreen()) this.game.audio.play('enemyGunshot');
       this.shoot(3);
     }
   
@@ -44,6 +45,7 @@ class Enemy extends Entity {
   
     kill() {
       this.dead = true;
+      this.game.audio.play('enemyExplosion');
     }
   }
   

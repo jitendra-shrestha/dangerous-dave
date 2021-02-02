@@ -29,6 +29,7 @@ class Player extends Entity {
         this.y += vel;
         this.adjustFall();
       }
+      this.game.audio.play('jetpack');
       this.jetpackFuel -= 0.1;
     } else {
       if (keys.up.hold) {
@@ -37,6 +38,7 @@ class Player extends Entity {
           this.isJumping = true;
           this.velY = vel;
           this.jumpGoal = this.y - 2 * Tile.size;
+          this.game.audio.play('jump');
         }
       }
 
@@ -83,7 +85,12 @@ class Player extends Entity {
       this.adjustWalk('left');
     }
 
+    if ((keys.left.hold || keys.right.hold) && this.canJump()) {
+      this.game.audio.play('walk');
+    }
+
     if (keys.z.pulse && this.hasGun) {
+      this.game.audio.play('playerGunshot');
       this.shoot(5);
     }
 
@@ -170,14 +177,19 @@ class Player extends Entity {
     const tiles = this.getTouchedTiles();
     for (let tile of tiles) {
       if (tile.tile === 'T') {
+        this.game.audio.play('trophy');
         this.hasTrophy = true;
       }
 
       if (tile.tile === '=') {
         if (this.hasTrophy) {
           this.hasTrophy = false;
+          this.hasGun = false;
+          this.hasJetpack = false;
+          this.isUsingJetpack = false;
           this.game.input.clear();
           this.game.level.isLevelingUp = true;
+          this.game.audio.play('door');
           this.x = Tile.size;
           this.y = 4 * Tile.size;
         }
@@ -194,12 +206,13 @@ class Player extends Entity {
       }
 
       if (Tile.isLethal(tile.tile)) {
+        this.game.audio.play('playerExplosion');
         this.kill();
       }
 
       if (Tile.isPickable(tile.tile)) {
+        this.game.audio.play('pickup');
         this.game.score.value += Tile.scoreValue(tile.tile);
-        console.log(this.game.score.value);
         this.game.level.clearTile(tile.x, tile.y);
       }
     }
