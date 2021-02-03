@@ -88,6 +88,7 @@ class Game {
 
   start() {
     const that = this;
+
     const splashdiv = document.createElement("div");
     const container = document.getElementById(this.containerId);
     splashdiv.setAttribute("id", "splashdiv");
@@ -146,7 +147,7 @@ class Game {
     // initGameObjects();
     // that.loop();
 
-    // levelEditor()
+    // levelEditor();
 
     function initGameObjects() {
       that.input = new Input();
@@ -163,6 +164,7 @@ class Game {
 
   end() {
     const that = this;
+
     const gameOverCanvas = document.createElement("canvas");
     that.canvas.canvas.insertAdjacentElement("afterend", gameOverCanvas);
     const endCtx = gameOverCanvas.getContext("2d");

@@ -9,7 +9,7 @@ class Editor {
     this.container = document.getElementById(containerId);
     this.options = options || {};
     this.canvas.width = this.options.width || 640;
-    this.canvas.height = 450 || 450;
+    this.canvas.height = 480 || 450;
     this.container.appendChild(this.canvas);
     this.ctx = this.canvas.getContext("2d");
     this.recentTile = "B";
@@ -115,6 +115,7 @@ class Editor {
     this.ctx.fillStyle = "#000";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.strokeStyle = "yellow";
+    this.ctx.lineWidth = 4;
     this.ctx.strokeRect(this.values[0], 345, 32, 32);
     this.canvas.addEventListener("click", this.handler.bind(this));
     window.addEventListener("keydown", this.handlerStart.bind(this));
@@ -131,6 +132,7 @@ class Editor {
 
   handlerStart(e) {
     if (e.code === "Space") {
+      this.ctx.lineWidth = 4;
       this.ctx.strokeStyle = "yellow";
       this.ctx.strokeRect(this.values[this.currentIndex], 345, 32, 32);
       this.markTile(this.currentIndex);
@@ -145,7 +147,6 @@ class Editor {
     }
 
     if (e.code === "Escape") {
-      console.log(this.mapArr);
       localStorage.setItem("map", JSON.stringify(this.mapArr));
       this.canvas.remove();
       let splashdiv = document.getElementById("splashdiv");
@@ -167,7 +168,6 @@ class Editor {
   }
 
   savePoint(x, y, tile) {
-    // console.log(x, y, tile);
     if (tile == "player") {
       tile = "p";
     }
@@ -242,18 +242,13 @@ class Editor {
     }
 
     this.mapArr[y] = temp.join("");
-    // console.log(this.mapArr);
   }
 
   handler(e) {
     let x = Math.floor((e.pageX - 200) / 32);
     let y = Math.floor((e.pageY - 150) / 32);
-    // this.checkTile();
-    // this.CheckRepeat();
-    // console.log(x, y);
 
     if (x < 20 && y < 10) {
-      // console.log(x,y,this.recentTile);
       if (this.recentTile == "b") {
         this.recentTile = " ";
         this.savePoint(x, y, this.recentTile);
@@ -268,35 +263,38 @@ class Editor {
       this.ctx.strokeStyle = "#FFFFFF";
       this.ctx.fillRect(x, y, 32, 32);
       this.ctx.strokeRect(x, y, 32, 32);
+
       if (this.recentTile != " ") {
         this.sprites[this.recentTile].draw(this.ctx, x, y);
       }
     }
 
-    if ((x <= 19 && x >= 17) || y == 10 || y == 11) {
-      this.clear();
-      this.ctx.fillStyle = "#000";
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      for (let i = 0; i < 20; i++) {
-        for (let j = 0; j < 10; j++) {
-          this.ctx.strokeStyle = "#FFFFFF";
-          this.ctx.strokeRect(i * 32, j * 32, 32, 32);
+    if (y >= 10 && y <= 11) {
+      if (x >= 17 && x <= 19) {
+        this.clear();
+        this.ctx.fillStyle = "#000";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let i = 0; i < 20; i++) {
+          for (let j = 0; j < 10; j++) {
+            this.ctx.strokeStyle = "#FFFFFF";
+            this.ctx.strokeRect(i * 32, j * 32, 32, 32);
+          }
         }
+        this.mapArr = [
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+        ];
+        this.recentTile = "B";
+        this.showTiles();
       }
-      this.mapArr = [
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-        "                    ",
-      ];
-      this.recentTile = "B";
-      this.showTiles();
     }
   }
 
@@ -325,12 +323,23 @@ class Editor {
       this.ctx.strokeRect(this.values[i], 345, 32, 32);
       this.sprites[this.tiles[i]].draw(this.ctx, this.values[i], 345);
     }
-    this.ctx.strokeRect(570, 340, 50, 40);
+    this.ctx.strokeRect(550, 340, 80, 45);
     this.ctx.fillStyle = "#FFFFFF";
-    this.ctx.fillRect(570, 340, 50, 40);
+    this.ctx.fillRect(550, 340, 80, 45);
     this.ctx.fillStyle = "#000";
-    this.ctx.font = "15px arcadeclassic";
-    this.ctx.fillText("CLEAR", 570, 365);
+    this.ctx.font = "20px arcadeclassic";
+    this.ctx.fillText("ERASE", 560, 365);
+    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.fillText("SPACE:  select  tiles", 20, 410);
+    this.ctx.fillText("Draw   tiles   by  click", 300, 410);
+    this.ctx.fillText("ESCAPE:  To s ave  map", 20, 430);
+    this.ctx.fillText("Click  on  Erase to  clear ", 300, 430);
+    this.ctx.fillText(
+      "Note: You  have  to  erase  your  level  to  play   original level ",
+      40,
+      460
+    );
+    this.ctx.fillStyle = "#000";
   }
 
   /**
