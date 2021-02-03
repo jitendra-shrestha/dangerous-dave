@@ -1,5 +1,5 @@
 const sprite = new Sprite();
-let game = null;
+let game;
 Sprite.image.onload = () => {
   game = new Game("container", { width: 640, height: 385 });
 

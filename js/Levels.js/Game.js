@@ -11,10 +11,12 @@ class Game {
 
     this.flag = 0;
     var mapArr = localStorage.getItem("map");
-    this.cMap = JSON.parse(mapArr);
-    for (let i = 0; i < 10; i++) {
-      if (this.cMap[i] != "                    ") {
-        this.flag = 1;
+    if (mapArr) {
+      this.cMap = JSON.parse(mapArr);
+      for (let i = 0; i < 10; i++) {
+        if (this.cMap[i] != "                    ") {
+          this.flag = 1;
+        }
       }
     }
 
