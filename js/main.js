@@ -1,7 +1,8 @@
 const sprite= new Sprite()
+let game = null;
 Sprite.image.onload=()=>{
  
-  let game = new Game('container', { width: 640, height: 385 });
+  game = new Game('container', { width: 640, height: 385 });
 
   window.addEventListener('keydown', (e) => {
       if (e.keyCode === 13 && game.hasGameFinished) {

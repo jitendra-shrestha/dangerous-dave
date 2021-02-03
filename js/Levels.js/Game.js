@@ -68,6 +68,7 @@ class Game {
 
     const splashdiv = document.createElement('div');
     const container = document.getElementById(this.containerId);
+    splashdiv.setAttribute('id','splashdiv');
     splashdiv.style.width = 640 + 'px';
     splashdiv.style.height = 400 + 'px';
     splashdiv.style.backgroundColor = '#000000';
@@ -112,7 +113,9 @@ class Game {
         that.loop();
       }
       if (e.keyCode === 13) {
-        container.removeChild(splashdiv);
+        if(splashdiv){
+          container.removeChild(splashdiv);
+        }
         window.removeEventListener('keydown',handler);
         levelEditor();
       }
@@ -123,7 +126,7 @@ class Game {
     // initGameObjects();
     // that.loop();
 
-    // levelEditor();
+    // levelEditor()
 
     function initGameObjects() {
       that.input = new Input();
