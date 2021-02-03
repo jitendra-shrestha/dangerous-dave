@@ -10,13 +10,23 @@ class Sprite {
 
     if (!Sprite.image) {
       Sprite.image = new Image();
-      Sprite.image.src = 'assets/sprites/sprite.png';
+      Sprite.image.src = "assets/sprites/sprite.png";
     }
   }
 
   draw(ctx, x, y) {
     // console.log(Sprite.image.complete)
-    ctx.drawImage(Sprite.image, this.sx, this.sy, this.sw, this.sh, x, y, this.dw, this.dh);
+    ctx.drawImage(
+      Sprite.image,
+      this.sx,
+      this.sy,
+      this.sw,
+      this.sh,
+      x,
+      y,
+      this.dw,
+      this.dh
+    );
   }
 
   drawA(ctx, x, y) {
@@ -24,6 +34,16 @@ class Sprite {
   }
 
   drawT(ctx, x, y) {
-    ctx.drawImage(Sprite.image, this.sx, this.sy, 64, 64, x, y, this.dw, this.dh);
+    ctx.drawImage(
+      Sprite.image,
+      this.sx,
+      this.sy,
+      64,
+      64,
+      x,
+      y,
+      this.dw,
+      this.dh
+    );
   }
 }

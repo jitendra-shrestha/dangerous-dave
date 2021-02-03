@@ -29,7 +29,7 @@ class Player extends Entity {
         this.y += vel;
         this.adjustFall();
       }
-      this.game.audio.play('jetpack');
+      this.game.audio.play("jetpack");
       this.jetpackFuel -= 0.1;
     } else {
       if (keys.up.hold) {
@@ -38,7 +38,7 @@ class Player extends Entity {
           this.isJumping = true;
           this.velY = vel;
           this.jumpGoal = this.y - 2 * Tile.size;
-          this.game.audio.play('jump');
+          this.game.audio.play("jump");
         }
       }
 
@@ -51,15 +51,14 @@ class Player extends Entity {
           this.velY = vel;
           this.blink = 1;
         }
-        
+
         this.adjustFall();
-        
       }
 
       if (this.isJumping) {
         this.y -= this.velY;
         this.velY -= 0.01;
-        this.blink= 0;
+        this.blink = 0;
 
         if (this.y <= this.jumpGoal) {
           this.y = this.jumpGoal;
@@ -75,22 +74,22 @@ class Player extends Entity {
       this.x += vel;
       this.direction = 1;
       this.blink = 0;
-      this.adjustWalk('right');
+      this.adjustWalk("right");
     }
 
     if (keys.left.hold) {
       this.x -= vel;
       this.direction = -1;
       this.blink = 0;
-      this.adjustWalk('left');
+      this.adjustWalk("left");
     }
 
     if ((keys.left.hold || keys.right.hold) && this.canJump()) {
-      this.game.audio.play('walk');
+      this.game.audio.play("walk");
     }
 
     if (keys.z.pulse && this.hasGun) {
-      this.game.audio.play('playerGunshot');
+      this.game.audio.play("playerGunshot");
       this.shoot(5);
     }
 
@@ -113,22 +112,22 @@ class Player extends Entity {
 
   canJump() {
     this.y++;
-    const ret = this.clipped('down');
+    const ret = this.clipped("down");
     this.y--;
     return ret;
   }
 
   /**
-   * 
+   *
    * @param {number} direction - 1 if right or -1 if left
    */
   adjustWalk(direction) {
     if (this.clipped(direction)) {
-      if (direction === 'left') {
+      if (direction === "left") {
         this.x += this.width - 1;
       }
       this.x = Tile.size * Math.floor(this.x / Tile.size);
-      if (direction === 'right') {
+      if (direction === "right") {
         return (this.x += Tile.size - this.width);
       }
     } else {
@@ -139,7 +138,7 @@ class Player extends Entity {
   }
 
   adjustJump() {
-    if (this.clipped('up')) {
+    if (this.clipped("up")) {
       this.y += Tile.size;
       this.y = Tile.size * Math.floor(this.y / Tile.size);
       this.isJumping = false;
@@ -148,40 +147,39 @@ class Player extends Entity {
   }
 
   adjustFall() {
-    if (this.clipped('down')) {
+    if (this.clipped("down")) {
       this.y = Tile.size * Math.floor(this.y / Tile.size);
     }
   }
 
   draw() {
-    if(this.blink === 1){
-        let sprite = 'player';
-        this.game.canvas.drawSprite(this.x, this.y, sprite);     
-    }else {
-      let sprite = 'player';
+    if (this.blink === 1) {
+      let sprite = "player";
+      this.game.canvas.drawSprite(this.x, this.y, sprite);
+    } else {
+      let sprite = "player";
       sprite += Math.floor(this.t / 5) % 2;
-      sprite += this.direction === 1 ? 'r' : 'l';
+      sprite += this.direction === 1 ? "r" : "l";
 
-     this.game.canvas.drawSprite(this.x, this.y, sprite);
-    } 
-    
+      this.game.canvas.drawSprite(this.x, this.y, sprite);
+    }
+
     if (this.isUsingJetpack) {
-     let sprite = 'playerj';
-      sprite += this.direction === 1 ? 'r' : 'l';
-     this.game.canvas.drawSprite(this.x, this.y, sprite);
-
+      let sprite = "playerj";
+      sprite += this.direction === 1 ? "r" : "l";
+      this.game.canvas.drawSprite(this.x, this.y, sprite);
     }
   }
 
   touchTiles() {
     const tiles = this.getTouchedTiles();
     for (let tile of tiles) {
-      if (tile.tile === 'T') {
-        this.game.audio.play('trophy');
+      if (tile.tile === "T") {
+        this.game.audio.play("trophy");
         this.hasTrophy = true;
       }
 
-      if (tile.tile === '=') {
+      if (tile.tile === "=") {
         if (this.hasTrophy) {
           this.hasTrophy = false;
           this.hasGun = false;
@@ -189,29 +187,28 @@ class Player extends Entity {
           this.isUsingJetpack = false;
           this.game.input.clear();
           this.game.level.isLevelingUp = true;
-          this.game.audio.play('door');
+          this.game.audio.play("door");
           this.x = Tile.size;
           this.y = 4 * Tile.size;
         }
       }
 
-      if (tile.tile === 'Z') {
+      if (tile.tile === "Z") {
         this.hasGun = true;
       }
 
-      if (tile.tile === 'J') {
+      if (tile.tile === "J") {
         this.hasJetpack = true;
         this.hasGun = false;
-
       }
 
       if (Tile.isLethal(tile.tile)) {
-        this.game.audio.play('playerExplosion');
+        this.game.audio.play("playerExplosion");
         this.kill();
       }
 
       if (Tile.isPickable(tile.tile)) {
-        this.game.audio.play('pickup');
+        this.game.audio.play("pickup");
         this.game.score.value += Tile.scoreValue(tile.tile);
         this.game.level.clearTile(tile.x, tile.y);
       }

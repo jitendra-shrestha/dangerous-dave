@@ -8,13 +8,34 @@ class Game {
     this.frame = 1;
     this.animator;
     this.lives = 3;
-    this.restart = false;
-    this.nextLevel = false;
-    this.currentLevel = 0;
-    this.lastLevel = 3;
-    this.options = options;
-    this.containerId = containerId;
-    this.hasGameFinished = false;
+
+    this.flag = 0;
+    var mapArr = localStorage.getItem("map");
+    this.cMap = JSON.parse(mapArr);
+    for (let i = 0; i < 10; i++) {
+      if (this.cMap[i] != "                    ") {
+        this.flag = 1;
+      }
+    }
+
+    if (this.flag == 0) {
+      this.restart = false;
+      this.nextLevel = false;
+      this.currentLevel = 0;
+      this.lastLevel = 3;
+      this.options = options;
+      this.containerId = containerId;
+      this.hasGameFinished = false;
+    } else {
+      this.restart = false;
+      this.nextLevel = false;
+      this.currentLevel = 4;
+      this.lastLevel = 4;
+      this.options = options;
+      this.containerId = containerId;
+      this.hasGameFinished = false;
+    }
+
     this.start();
   }
 
@@ -65,63 +86,60 @@ class Game {
 
   start() {
     const that = this;
-
-    const splashdiv = document.createElement('div');
+    const splashdiv = document.createElement("div");
     const container = document.getElementById(this.containerId);
-    splashdiv.setAttribute('id','splashdiv');
-    splashdiv.style.width = 640 + 'px';
-    splashdiv.style.height = 400 + 'px';
-    splashdiv.style.backgroundColor = '#000000';
+    splashdiv.setAttribute("id", "splashdiv");
+    splashdiv.style.width = 640 + "px";
+    splashdiv.style.height = 400 + "px";
+    splashdiv.style.backgroundColor = "#000000";
 
     container.appendChild(splashdiv);
 
-    const p = document.createElement('p');
-    p.setAttribute('class','context')
+    const p = document.createElement("p");
+    p.setAttribute("class", "context");
     splashdiv.appendChild(p);
-    p.innerHTML ="Press Space  to Play <br> Press Enter to Level Editor";
-    const p2 = document.createElement('p');
-    p2.setAttribute('class','controls')
+    p.innerHTML = "Press Space  to Play <br> Press Enter to Level Editor";
+    const p2 = document.createElement("p");
+    p2.setAttribute("class", "controls");
     splashdiv.appendChild(p2);
-    p2.innerHTML ="Controls <br>  Move: Arrow Keys  <br> Z: Shoot <br> X: UseJetpack";
-    
-    
-    const img = document.createElement('img');
+    p2.innerHTML =
+      "Controls <br>  Move: Arrow Keys  <br> Z: Shoot <br> X: UseJetpack";
+
+    const img = document.createElement("img");
     splashdiv.appendChild(img);
-    img.style.width = 220 + 'px';
-    img.style.height = 90 + 'px';
-    img.src = 'assets/images/dangerous dave title.gif';
-    img.style.position ='absolute';
-    img.style.left = (640/2 - 110) + 'px';
-    img.style.top = 30 + 'px';
+    img.style.width = 220 + "px";
+    img.style.height = 90 + "px";
+    img.src = "assets/images/dangerous dave title.gif";
+    img.style.position = "absolute";
+    img.style.left = 640 / 2 - 110 + "px";
+    img.style.top = 30 + "px";
 
-    const img2 = document.createElement('img');
+    const img2 = document.createElement("img");
     splashdiv.appendChild(img2);
-    img2.style.width = 300 + 'px';
-    img2.style.height = 150+ 'px';
-    img2.src = 'assets/images/dave_background.gif';
-    img2.style.position ='absolute';
-    img2.style.left = (640/2 - 150) + 'px';
-    img2.style.top = 150 + 'px';
+    img2.style.width = 300 + "px";
+    img2.style.height = 150 + "px";
+    img2.src = "assets/images/dave_background.gif";
+    img2.style.position = "absolute";
+    img2.style.left = 640 / 2 - 150 + "px";
+    img2.style.top = 150 + "px";
 
-    window.addEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
 
-    function handler(e){
+    function handler(e) {
       if (e.keyCode === 32) {
         container.removeChild(splashdiv);
-        window.removeEventListener('keydown',handler);
+        window.removeEventListener("keydown", handler);
         initGameObjects();
         that.loop();
       }
       if (e.keyCode === 13) {
-        if(splashdiv){
+        if (splashdiv) {
           container.removeChild(splashdiv);
         }
-        window.removeEventListener('keydown',handler);
+        window.removeEventListener("keydown", handler);
         levelEditor();
       }
     }
-
-
 
     // initGameObjects();
     // that.loop();
@@ -136,25 +154,24 @@ class Game {
       that.level = new Level(that, that.currentLevel);
     }
 
-    function levelEditor(){
-      that.canvas = new  Editor(that.containerId, that.options);
+    function levelEditor() {
+      that.canvas = new Editor(that.containerId, that.options);
     }
   }
 
   end() {
     const that = this;
-    const gameOverCanvas = document.createElement('canvas');
-    that.canvas.canvas.insertAdjacentElement('afterend', gameOverCanvas);
-    const endCtx = gameOverCanvas.getContext('2d');
-
+    const gameOverCanvas = document.createElement("canvas");
+    that.canvas.canvas.insertAdjacentElement("afterend", gameOverCanvas);
+    const endCtx = gameOverCanvas.getContext("2d");
 
     gameOverCanvas.width = 400;
     gameOverCanvas.height = 300;
-    gameOverCanvas.classList.add('last-canvas');
+    gameOverCanvas.classList.add("last-canvas");
 
-    let inputBuffer = '';
+    let inputBuffer = "";
     drawInputBoard();
-    window.addEventListener('keydown', endScreenEventHandler);
+    window.addEventListener("keydown", endScreenEventHandler);
 
     function endScreenEventHandler(e) {
       let input = String.fromCharCode(e.keyCode);
@@ -168,9 +185,9 @@ class Game {
         inputBuffer = inputBuffer.slice(0, -1);
       }
 
-      if (e.keyCode === 13 && inputBuffer !== '') {
+      if (e.keyCode === 13 && inputBuffer !== "") {
         saveScore({ name: inputBuffer, score: that.score.value });
-        window.removeEventListener('keydown', endScreenEventHandler);
+        window.removeEventListener("keydown", endScreenEventHandler);
         drawScoreBoard();
         that.hasGameFinished = true;
         return;
@@ -180,26 +197,34 @@ class Game {
     }
 
     function drawInputBoard() {
-      endCtx.fillStyle = '#f5f5f5';
+      endCtx.fillStyle = "#f5f5f5";
       endCtx.fillRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
-      endCtx.fillStyle = '#a62c07';
-      endCtx.font = '20px arcadeclassic';
-      endCtx.textAlign = 'center';
+      endCtx.fillStyle = "#a62c07";
+      endCtx.font = "20px arcadeclassic";
+      endCtx.textAlign = "center";
 
-      let cursor = (inputBuffer.length < 5) ? '|' : '';
-      endCtx.fillText('NAME:' + inputBuffer + cursor, gameOverCanvas.width / 2, 130);
-      endCtx.fillText('SCORE:' + that.score.value, gameOverCanvas.width / 2, 180);
-      endCtx.font = '15px arcadeclassic';
-      endCtx.fillText('PRESS ENTER TO SAVE!', gameOverCanvas.width / 2, 270);
+      let cursor = inputBuffer.length < 5 ? "|" : "";
+      endCtx.fillText(
+        "NAME:" + inputBuffer + cursor,
+        gameOverCanvas.width / 2,
+        130
+      );
+      endCtx.fillText(
+        "SCORE:" + that.score.value,
+        gameOverCanvas.width / 2,
+        180
+      );
+      endCtx.font = "15px arcadeclassic";
+      endCtx.fillText("PRESS ENTER TO SAVE!", gameOverCanvas.width / 2, 270);
     }
 
     function drawScoreBoard() {
-      endCtx.fillStyle = '#f5f5f5';
+      endCtx.fillStyle = "#f5f5f5";
       endCtx.fillRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
-      endCtx.fillStyle = '#a62c07';
-      endCtx.textAlign = 'center';
-      endCtx.font = '30px arcadeclassic';
-      endCtx.fillText('HIGHSCORES', gameOverCanvas.width / 2, 50);
+      endCtx.fillStyle = "#a62c07";
+      endCtx.textAlign = "center";
+      endCtx.font = "30px arcadeclassic";
+      endCtx.fillText("HIGHSCORES", gameOverCanvas.width / 2, 50);
 
       const scoreInfo = readScore();
       let scoreY = 50;
@@ -207,41 +232,41 @@ class Game {
       let scoreCounter = scoreInfo.length > 5 ? 5 : scoreInfo.length;
 
       for (let i = 0; i < scoreCounter; i++) {
-        endCtx.textAlign = 'left';
-        endCtx.font = '20px arcadeclassic';
-        endCtx.fillText((i + 1), 120, scoreY + 50);
+        endCtx.textAlign = "left";
+        endCtx.font = "20px arcadeclassic";
+        endCtx.fillText(i + 1, 120, scoreY + 50);
         endCtx.fillText(scoreInfo[i].name, 180, scoreY + 50);
-        endCtx.textAlign = 'right';
+        endCtx.textAlign = "right";
         endCtx.fillText(scoreInfo[i].score, 320, scoreY + 50);
         scoreY += 30;
       }
 
-      endCtx.font = '15px arcadeclassic';
-      endCtx.textAlign = 'center';
-      endCtx.fillText('PRESS ENTER TO RESTART!', gameOverCanvas.width / 2, 280);
+      endCtx.font = "15px arcadeclassic";
+      endCtx.textAlign = "center";
+      endCtx.fillText("PRESS ENTER TO RESTART!", gameOverCanvas.width / 2, 280);
     }
 
     function saveScore(scoreProp) {
       let scoreInfo;
 
-      if (localStorage.getItem('scoreInfo') === null) {
+      if (localStorage.getItem("scoreInfo") === null) {
         scoreInfo = [];
       } else {
-        scoreInfo = JSON.parse(localStorage.getItem('scoreInfo'));
+        scoreInfo = JSON.parse(localStorage.getItem("scoreInfo"));
       }
 
       scoreInfo.push(scoreProp);
       scoreInfo.sort((a, b) => b.score - a.score);
-      localStorage.setItem('scoreInfo', JSON.stringify(scoreInfo));
+      localStorage.setItem("scoreInfo", JSON.stringify(scoreInfo));
     }
 
     function readScore() {
       let scoreInfo;
 
-      if (localStorage.getItem('scoreInfo') === null) {
+      if (localStorage.getItem("scoreInfo") === null) {
         scoreInfo = [];
       } else {
-        scoreInfo = JSON.parse(localStorage.getItem('scoreInfo'));
+        scoreInfo = JSON.parse(localStorage.getItem("scoreInfo"));
       }
 
       return scoreInfo;

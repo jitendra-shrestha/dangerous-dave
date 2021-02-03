@@ -1,6 +1,6 @@
 class AnimatedSprite extends Sprite {
   /**
-   * 
+   *
    * @param {number} i - x position
    * @param {number} j - y position
    * @param {number} sw - source width
@@ -14,11 +14,10 @@ class AnimatedSprite extends Sprite {
     this.frames = 0;
   }
 
-
-/**
- * 
- * @param {number} speed - speed for animation
- */
+  /**
+   *
+   * @param {number} speed - speed for animation
+   */
   update(speed) {
     if (this.frames % Math.floor(1000 / speed) === 0) {
       this.currentFrame = ++this.currentFrame % this.framesCount;
@@ -30,7 +29,7 @@ class AnimatedSprite extends Sprite {
   }
 
   /**
-   * 
+   *
    * @param {string} ctx - context in canvas
    * @param {number} x - x position in canvas
    * @param {number} y - y position in canvas
@@ -38,6 +37,16 @@ class AnimatedSprite extends Sprite {
    */
   animate(ctx, x, y, speed) {
     this.update(speed);
-    ctx.drawImage(Sprite.image, this.srcX, this.srcY, this.sw, this.sh, x, y, this.dw, this.dh);
+    ctx.drawImage(
+      Sprite.image,
+      this.srcX,
+      this.srcY,
+      this.sw,
+      this.sh,
+      x,
+      y,
+      this.dw,
+      this.dh
+    );
   }
 }

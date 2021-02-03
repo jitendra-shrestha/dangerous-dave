@@ -1,7 +1,7 @@
 class Entity {
   /**
-   * 
-   * @param {object} game - object of game  
+   *
+   * @param {object} game - object of game
    * @param {number} x - x position
    * @param {number} y - y position
    */
@@ -32,7 +32,6 @@ class Entity {
       }
     }
     return corners;
-
   }
 
   /**
@@ -46,14 +45,14 @@ class Entity {
       touchedTiles.push({
         x: corners[i][0],
         y: corners[i][1],
-        tile: this.game.level.getTile(corners[i][0], corners[i][1])
+        tile: this.game.level.getTile(corners[i][0], corners[i][1]),
       });
     }
     return touchedTiles;
   }
 
   /**
-   * 
+   *
    * @param {number} direction - 1 if right or -1 if left
    */
   clipped(direction) {
@@ -63,20 +62,27 @@ class Entity {
       up: [tiles[0].tile, tiles[1].tile],
       down: [tiles[2].tile, tiles[3].tile],
       left: [tiles[0].tile, tiles[2].tile],
-      right: [tiles[1].tile, tiles[3].tile]
+      right: [tiles[1].tile, tiles[3].tile],
     };
 
-    return mapping[direction].map(Tile.isSolid).reduce((acc, cur) => acc || cur);
+    return mapping[direction]
+      .map(Tile.isSolid)
+      .reduce((acc, cur) => acc || cur);
   }
 
   /**
-   * 
-   * @param {number} x - x position 
+   *
+   * @param {number} x - x position
    * @param {number} y - y position
    * @param {object} rect - object of game
    */
   static pointInRect(x, y, rect) {
-    return x >= rect.x && x <= rect.x + rect.width && y >= rect.y && y <= rect.y + rect.height;
+    return (
+      x >= rect.x &&
+      x <= rect.x + rect.width &&
+      y >= rect.y &&
+      y <= rect.y + rect.height
+    );
   }
 
   onScreen() {
@@ -84,7 +90,7 @@ class Entity {
   }
 
   /**
-   * 
+   *
    * @param {number} x - x position
    * @param {number} y - y position
    */
@@ -93,15 +99,17 @@ class Entity {
   }
 
   /**
-   * 
+   *
    * @param {object} entity - object of entity
    */
 
   hasCollided(entity) {
-    return (this.x < entity.x + entity.width &&
+    return (
+      this.x < entity.x + entity.width &&
       this.x + this.width > entity.x &&
       this.y < entity.y + entity.height &&
-      this.y + this.height > entity.y);
+      this.y + this.height > entity.y
+    );
   }
 
   shoot(vel) {
@@ -112,5 +120,4 @@ class Entity {
     this.bullet = new Bullet(this.game, this, x, y, this.direction, vel);
     this.game.level.entities.push(this.bullet);
   }
-  
 }

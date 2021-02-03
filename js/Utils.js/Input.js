@@ -5,29 +5,29 @@ class Input {
     this.pressed = {};
     this.keys = {};
     this.keymap = {
-      32: 'space',
-      37: 'left',
-      38: 'up',
-      39: 'right',
-      40: 'down',
-      88: 'x',
-      90: 'z'
+      32: "space",
+      37: "left",
+      38: "up",
+      39: "right",
+      40: "down",
+      88: "x",
+      90: "z",
     };
 
     for (let code in this.keymap) {
       const key = this.keymap[code];
       this.keys[key] = {
         hold: false,
-        pulse: false
+        pulse: false,
       };
     }
 
-    window.addEventListener('keydown', this.handler.bind(this));
-    window.addEventListener('keyup', this.handler.bind(this));
+    window.addEventListener("keydown", this.handler.bind(this));
+    window.addEventListener("keyup", this.handler.bind(this));
   }
 
   /**
-   * 
+   *
    * @param {event} e - event of action listener
    */
   handler(e) {
@@ -36,14 +36,14 @@ class Input {
       return true;
     }
 
-    if (e.type === 'keydown') {
+    if (e.type === "keydown") {
       if (!this.pressed[key]) {
         this.pressed[key] = true;
         this.down[key] = true;
       }
     }
 
-    if (e.type === 'keyup') {
+    if (e.type === "keyup") {
       this.pressed[key] = false;
       this.up[key] = true;
     }
@@ -81,7 +81,7 @@ class Input {
       let key = this.keymap[code];
       this.keys[key] = {
         hold: false,
-        pulse: false
+        pulse: false,
       };
     }
   }
