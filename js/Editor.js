@@ -15,7 +15,6 @@ class Editor {
     this.recentTile = "B";
     this.size = 20;
     this.currentIndex = 1;
-    this.repeat = false;
     this.mapArr = [
       "                    ",
       "                    ",
@@ -28,10 +27,6 @@ class Editor {
       "                    ",
       "                    ",
     ];
-    this.hasDoor = false;
-    this.hasPipe = false;
-    this.hasTrophy = false;
-    this.hasPlayer = false;
 
     this.values = [
       20,
@@ -111,6 +106,10 @@ class Editor {
     this.start();
   }
 
+  /**
+   * draws grid in canvas and add eventlistener
+   */
+
   start() {
     this.ctx.fillStyle = "#000";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -130,6 +129,10 @@ class Editor {
     this.showTiles();
   }
 
+  /**
+   *
+   * @param {event} e - event when key pressed
+   */
   handlerStart(e) {
     if (e.code === "Space") {
       this.ctx.lineWidth = 4;
@@ -141,9 +144,6 @@ class Editor {
       if (this.currentIndex > this.values.length - 1) {
         this.currentIndex = 0;
       }
-    }
-
-    if (e.code === "Enter") {
     }
 
     if (e.code === "Escape") {
@@ -167,26 +167,15 @@ class Editor {
     }
   }
 
+  /**
+   *
+   * @param {number} x - x position in canvas
+   * @param {number} y - y position in canvas
+   * @param {char} tile - character of tile
+   */
   savePoint(x, y, tile) {
     if (tile == "player") {
       tile = "p";
-    }
-
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 20; j++) {
-        if (this.mapArr[i][j] == "=") {
-          this.hasDoor = true;
-        }
-        if (this.mapArr[i][j] == "+") {
-          this.hasPipe = true;
-        }
-        if (this.mapArr[i][j] == "T") {
-          this.hasTrophy = true;
-        }
-        if (this.mapArr[i][j] == "p") {
-          this.hasPlayer = true;
-        }
-      }
     }
 
     let flag = 0;
@@ -216,19 +205,6 @@ class Editor {
       temp[k] = this.mapArr[y][k];
     }
 
-    // if(tile == 'p' && this.hasPlayer == true){
-    //     flag = 1;
-    // }
-    // if(tile == 'T' && this.hasTrophy == true){
-    //     flag = 1;
-    // }
-    // if(tile == '=' && this.hasDoor == true){
-    //     flag = 1;
-    // }
-    // if(tile == '+' && this.hasPipe == true){
-    //     flag = 1;
-    // }
-
     if (flag == 0) {
       for (let i = 0; i < 10; i++) {
         if (i === y) {
@@ -244,6 +220,10 @@ class Editor {
     this.mapArr[y] = temp.join("");
   }
 
+  /**
+   *
+   * @param {event} e - event when clicked in canvas
+   */
   handler(e) {
     let x = Math.floor((e.pageX - 200) / 32);
     let y = Math.floor((e.pageY - 150) / 32);
@@ -298,25 +278,9 @@ class Editor {
     }
   }
 
-  CheckRepeat() {
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 20; j++) {
-        if (this.mapArr[i][j] == "=") {
-          this.repeat = true;
-        }
-        if (this.mapArr[i][j] == "+") {
-          this.repeat = true;
-        }
-        if (this.mapArr[i][j] == "T") {
-          this.repeat = true;
-        }
-        if (this.mapArr[i][j] == "p") {
-          this.repeat = true;
-        }
-      }
-    }
-  }
-
+  /**
+   * Shows tiles for selection
+   */
   showTiles() {
     this.ctx.strokeStyle = "#FFFFFF";
     for (let i = 0; i < this.values.length; i++) {

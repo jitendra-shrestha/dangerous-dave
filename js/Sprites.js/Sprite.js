@@ -1,4 +1,11 @@
 class Sprite {
+  /**
+   *
+   * @param {number} i - x position
+   * @param {number} j - y position
+   * @param {number} sw - source width
+   * @param {number} sh - source height
+   */
   constructor(i, j, sw, sh) {
     this.size = 64;
     this.sw = sw || this.size;
@@ -14,8 +21,13 @@ class Sprite {
     }
   }
 
+  /**
+   *
+   * @param {context} ctx - context in canvas
+   * @param {number} x - x position
+   * @param {number} y - y position
+   */
   draw(ctx, x, y) {
-    // console.log(Sprite.image.complete)
     ctx.drawImage(
       Sprite.image,
       this.sx,
@@ -29,10 +41,22 @@ class Sprite {
     );
   }
 
+  /**
+   *
+   * @param {context} ctx - context in canvas
+   * @param {number} x - x position
+   * @param {number} y - y position
+   */
   drawA(ctx, x, y) {
     ctx.drawImage(Sprite.image, this.sx, this.sy, 32, 48, x, y, 20, 26);
   }
 
+  /**
+   *
+   * @param {context} ctx - context in canvas
+   * @param {number} x - x position
+   * @param {number} y - y position
+   */
   drawT(ctx, x, y) {
     ctx.drawImage(
       Sprite.image,

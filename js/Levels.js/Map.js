@@ -1,4 +1,10 @@
 class LevelMap {
+  /**
+   *
+   * @param {number} level - current level number
+   * @param {array} map - custom map tiles
+   * returns object of given number
+   */
   constructor(level, map) {
     this.cMap = map;
     this.maps = [

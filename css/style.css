@@ -1,39 +1,38 @@
 @font-face {
-  font-family: 'arcadeclassic';
-  src: url('../assets/fonts/arcadeclassic.regular.ttf');
+  font-family: "arcadeclassic";
+  src: url("../assets/fonts/arcadeclassic.regular.ttf");
 }
 
 body {
   background-color: #313639;
 }
 
-#container {
+.container {
   position: absolute;
   width: 640px;
   left: 200px;
   top: 150px;
   color: #a62c07;
-  font-family: 'arcadeclassic';
+  font-family: "arcadeclassic";
   font-size: 40px;
 }
 
-.context{
+.context {
   position: absolute;
   bottom: -20px;
   text-align: center;
-  color: #DCDBDB;
-  width:100%;
+  color: #dcdbdb;
+  width: 100%;
 }
 
-.controls{
+.controls {
   position: absolute;
   top: 10px;
   left: 10px;
-  color: #DCDBDB;
+  color: #dcdbdb;
   font-size: 20px;
-  width:100%;
+  width: 100%;
 }
-
 
 .last-canvas {
   width: 400px;

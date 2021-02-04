@@ -15,6 +15,9 @@ class Bullet extends Entity {
     this.dead = false;
   }
 
+  /**
+   * updates bullet position
+   */
   update() {
     this.x += this.direction * this.vel;
 
@@ -36,10 +39,16 @@ class Bullet extends Entity {
     }
   }
 
+  /**
+   * draws bullet in screen
+   */
   draw() {
     this.game.canvas.drawSprite(this.x, this.y, this.sprite);
   }
 
+  /**
+   * die when out of screen
+   */
   die() {
     this.dead = true;
     this.owner.bullet = null;

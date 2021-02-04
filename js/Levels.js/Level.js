@@ -1,4 +1,9 @@
 class Level {
+  /**
+   *
+   * @param {object} game - object of game
+   * @param {number} n - current level
+   */
   constructor(game, n) {
     this.game = game;
     this.flag = 0;
@@ -33,23 +38,11 @@ class Level {
     }
   }
 
-  checkMap() {
-    var mapArr = localStorage.getItem("map");
-    this.cMap = JSON.parse(mapArr);
-    if (this.cMap) {
-      for (let i = 0; i < 10; i++) {
-        if (this.cMap[i] != "                    ") {
-          return true;
-        }
-      }
-      return false;
-    }
-  }
-
   /**
    *
-   * @param {number} x -
-   * @param {number} y
+   * @param {number} x - x position
+   * @param {number} y - y postion
+   * returns without decimal
    */
   getCoords(x, y) {
     const i = Math.floor(x / Tile.size);
@@ -57,6 +50,12 @@ class Level {
     return [i, j];
   }
 
+  /**
+   *
+   * @param {number} i - x position
+   * @param {number} j - y position
+   * returns true if in boundary or vice versa
+   */
   inBounds(i, j) {
     if (i < 0 || i >= this.map.tiles[0].length) {
       return false;
@@ -67,6 +66,12 @@ class Level {
     return true;
   }
 
+  /**
+   *
+   * @param {number} x - x position
+   * @param {number} y - y position
+   * returns tile in this position
+   */
   getTile(x, y) {
     const [i, j] = this.getCoords(x, y);
 
@@ -76,6 +81,12 @@ class Level {
     return this.map.tiles[j][i];
   }
 
+  /**
+   *
+   * @param {number} x - x position
+   * @param {number} y - y position
+   * clears tile in this position
+   */
   clearTile(x, y) {
     const [i, j] = this.getCoords(x, y);
 
@@ -86,10 +97,16 @@ class Level {
     }
   }
 
+  /**
+   * updates the entities
+   */
   update() {
     this.entities.map((entity) => entity.update());
   }
 
+  /**
+   * Draws tiles in screen
+   */
   draw() {
     if (this.isLevelingUp) {
       this.showLevelUpScreen();
@@ -119,9 +136,19 @@ class Level {
     this.drawInfoBoard();
   }
 
+  /**
+   *
+   * @param {char} tile - character for drawing tile
+   * @param {number} i - x position in canvas
+   * @param {number} j - y position in canvas
+   */
   drawTile(tile, i, j) {
     this.game.canvas.drawTile(tile, i, j);
   }
+
+  /**
+   * Shows Information of player
+   */
 
   drawInfoBoard() {
     let canvas = this.game.canvas.canvas;
@@ -151,6 +178,10 @@ class Level {
       this.drawInfo();
     }
   }
+
+  /**
+   * Shows status of trophy, gun , jetpack of player
+   */
 
   drawInfo() {
     if (this.player.hasTrophy) {
@@ -193,6 +224,9 @@ class Level {
     }
   }
 
+  /**
+   * Creates levelup screen
+   */
   showLevelUpScreen() {
     this.game.canvas.view.x = 0;
     this.game.canvas.clear();

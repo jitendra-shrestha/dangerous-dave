@@ -12,6 +12,9 @@ class Entity {
     this.bullet = null;
   }
 
+  /**
+   * returns false when called
+   */
   kill() {
     return false;
   }
@@ -54,6 +57,7 @@ class Entity {
   /**
    *
    * @param {number} direction - 1 if right or -1 if left
+   * returns mapping object
    */
   clipped(direction) {
     const tiles = this.getTouchedTiles();
@@ -85,6 +89,9 @@ class Entity {
     );
   }
 
+  /**
+   * player in screen or not
+   */
   onScreen() {
     return Entity.pointInRect(this.x, this.y, this.game.canvas.view);
   }
@@ -111,6 +118,11 @@ class Entity {
       this.y + this.height > entity.y
     );
   }
+
+  /**
+   *
+   * @param {number} vel - velocity for the bullet
+   */
 
   shoot(vel) {
     let x, y;

@@ -1,4 +1,9 @@
 class Game {
+  /**
+   *
+   * @param {string} containerId - id of the container
+   * @param {object} options - contains height and width of container
+   */
   constructor(containerId, options) {
     this.input;
     this.sound;
@@ -41,13 +46,18 @@ class Game {
     this.start();
   }
 
+  /**
+   * draws and update continuously
+   */
   loop() {
     if (this.update()) {
       this.render();
       this.animator = window.requestAnimationFrame(this.loop.bind(this));
     }
   }
-
+  /**
+   * Updates the level
+   */
   update() {
     if (this.lives < 0) {
       this.end();
@@ -85,6 +95,10 @@ class Game {
   render() {
     this.level.draw();
   }
+
+  /**
+   * creates splash screen
+   */
 
   start() {
     const that = this;
@@ -144,10 +158,9 @@ class Game {
       }
     }
 
-    // initGameObjects();
-    // that.loop();
-
-    // levelEditor();
+    /**
+     * Creates object of input, sound, score, canvas, level
+     */
 
     function initGameObjects() {
       that.input = new Input();
@@ -157,11 +170,18 @@ class Game {
       that.level = new Level(that, that.currentLevel);
     }
 
+    /**
+     * Opens level editor screen
+     */
+
     function levelEditor() {
       that.canvas = new Editor(that.containerId, that.options);
     }
   }
 
+  /**
+   * Creates end screen
+   */
   end() {
     const that = this;
 
@@ -177,6 +197,10 @@ class Game {
     drawInputBoard();
     window.addEventListener("keydown", endScreenEventHandler);
 
+    /**
+     *
+     * @param {event} e - event of listener
+     */
     function endScreenEventHandler(e) {
       let input = String.fromCharCode(e.keyCode);
       if (/[a-zA-Z]/.test(input)) {
@@ -199,7 +223,9 @@ class Game {
 
       drawInputBoard();
     }
-
+    /**
+     * Creates input screen to get input from user
+     */
     function drawInputBoard() {
       endCtx.fillStyle = "#f5f5f5";
       endCtx.fillRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
@@ -221,7 +247,9 @@ class Game {
       endCtx.font = "15px arcadeclassic";
       endCtx.fillText("PRESS ENTER TO SAVE!", gameOverCanvas.width / 2, 270);
     }
-
+    /**
+     * Creates score board which contains 5 top scores
+     */
     function drawScoreBoard() {
       endCtx.fillStyle = "#f5f5f5";
       endCtx.fillRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
@@ -250,6 +278,10 @@ class Game {
       endCtx.fillText("PRESS ENTER TO RESTART!", gameOverCanvas.width / 2, 280);
     }
 
+    /**
+     *
+     * @param {object} scoreProp - name and score
+     */
     function saveScore(scoreProp) {
       let scoreInfo;
 
@@ -264,6 +296,9 @@ class Game {
       localStorage.setItem("scoreInfo", JSON.stringify(scoreInfo));
     }
 
+    /**
+     * Reads score from the local storage
+     */
     function readScore() {
       let scoreInfo;
 

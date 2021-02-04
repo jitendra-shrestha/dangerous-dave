@@ -1,4 +1,10 @@
 class Enemy extends Entity {
+  /**
+   *
+   * @param {object} game - Object of game
+   * @param {number} x - X position
+   * @param {number} y - Y position
+   */
   constructor(game, x, y) {
     super(game, x, y);
     this.width = Tile.size;
@@ -13,6 +19,9 @@ class Enemy extends Entity {
     this.destY = this.y + Tile.size;
   }
 
+  /**
+   * Moves enemy right,down,left,up
+   */
   move() {
     if (this.x <= this.destX && this.y === this.orgY) {
       this.x += this.vel;
@@ -31,6 +40,9 @@ class Enemy extends Entity {
     }
   }
 
+  /**
+   * Updates moves of enemy and shoot when player is in same camera
+   */
   update() {
     this.move();
     this.direction = this.game.level.player.x < this.x ? -1 : 1;
@@ -38,9 +50,16 @@ class Enemy extends Entity {
     this.shoot(3);
   }
 
+  /**
+   * Draws enemy in given points
+   */
   draw() {
     this.game.canvas.drawSprite(this.x, this.y, this.sprite);
   }
+
+  /**
+   *  Plays audio when enemy is dead
+   */
 
   kill() {
     this.dead = true;

@@ -1,4 +1,9 @@
 class Score {
+  /**
+   *
+   * @param {string} containerId - id of the container
+   * @param {object} game - object of game
+   */
   constructor(containerId, game) {
     this.value = 0;
     this.game = game;
@@ -10,13 +15,26 @@ class Score {
     this.ctx = this.canvas.getContext("2d");
   }
 
+  /**
+   * updates scoreboard according to the scores
+   */
   update() {
     this.drawBoard();
   }
 
+  /**
+   *
+   * @param {number} x - x position
+   * @param {number} y - y position
+   * @param {char} sprite - character of tile
+   */
   drawSprite(x, y, sprite) {
     this.sprites[sprite].draw(this.ctx, x, y);
   }
+
+  /**
+   * Draws Score board
+   */
 
   drawBoard() {
     const formatNumberLength = (num, len) => {
@@ -107,7 +125,6 @@ class Score {
       this.ctx.drawImage(sprite, 517, 704, 32, 50, 285, 0, 22, 30);
       this.ctx.drawImage(sprite, 99, 704, 32, 50, 306, 0, 20, 30);
       this.ctx.drawImage(sprite, 258, 704, 31, 50, 326, 0, 20, 30);
-      // this.ctx.drawImage(sprite, 553, 704, 23, 50, 346, 0, 20, 30)
 
       if (this.game.currentLevel == 0) {
         this.ctx.drawImage(sprite, 0, 753, 32, 45, 365, 0, 21, 30);

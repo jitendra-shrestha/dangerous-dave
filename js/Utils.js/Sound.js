@@ -13,10 +13,18 @@ class Sound {
     this.walk.volume = 0.7;
   }
 
+  /**
+   *
+   * @param {String} sound - name of sound
+   */
   play(sound) {
     this[sound].play();
   }
 
+  /**
+   *
+   * @param {String} sound - name of sound
+   */
   stop(sound) {
     this[sound].pause();
     if (this[sound].currentTime) {

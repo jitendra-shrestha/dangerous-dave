@@ -1,4 +1,9 @@
 class Player extends Entity {
+  /**
+   *
+   * @param {object} game - object of game
+   * @param {object} position - x and y of the player
+   */
   constructor(game, position) {
     super(game, position.x * Tile.size, position.y * Tile.size);
     this.width = Tile.size - 4;
@@ -15,6 +20,9 @@ class Player extends Entity {
     this.jetpackFuel = 100;
     this.isUsingJetpack = false;
   }
+  /**
+   * updates player positions
+   */
 
   update() {
     const { keys } = this.game.input;
@@ -110,6 +118,9 @@ class Player extends Entity {
     this.touchTiles();
   }
 
+  /**
+   * checks player can jump or not
+   */
   canJump() {
     this.y++;
     const ret = this.clipped("down");
@@ -146,12 +157,18 @@ class Player extends Entity {
     }
   }
 
+  /**
+   * player in tile after jump
+   */
   adjustFall() {
     if (this.clipped("down")) {
       this.y = Tile.size * Math.floor(this.y / Tile.size);
     }
   }
 
+  /**
+   * Draws player
+   */
   draw() {
     if (this.blink === 1) {
       let sprite = "player";
@@ -171,6 +188,9 @@ class Player extends Entity {
     }
   }
 
+  /**
+   * check touch tiles by player
+   */
   touchTiles() {
     const tiles = this.getTouchedTiles();
     for (let tile of tiles) {
@@ -215,6 +235,9 @@ class Player extends Entity {
     }
   }
 
+  /**
+   * decreases lives of player and restart
+   */
   kill() {
     if (!this.dead) {
       this.dead = true;

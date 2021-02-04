@@ -28,7 +28,7 @@ class Input {
 
   /**
    *
-   * @param {event} e - event of action listener
+   * @param {event} e - event of  listener
    */
   handler(e) {
     const key = this.keymap[e.which];
@@ -51,6 +51,9 @@ class Input {
     return false;
   }
 
+  /**
+   * updates key status
+   */
   update() {
     for (let code in this.keymap) {
       let key = this.keymap[code];
@@ -76,6 +79,9 @@ class Input {
     }
   }
 
+  /**
+   * clear the key status
+   */
   clear() {
     for (let code in this.keymap) {
       let key = this.keymap[code];
